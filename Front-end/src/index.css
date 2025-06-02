@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;700;800&display=swap');
+
+
+@theme {
+    --color-primary-400: #001F39;
+    --font-poppins: "Poppins", sans-serif;
+    --font-roboto: "Roboto", sans-serif;
+    --font-montserrat: "Montserrat", sans-serif;
+
+}
