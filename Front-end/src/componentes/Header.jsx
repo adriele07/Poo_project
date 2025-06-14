@@ -1,16 +1,42 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+{
+  /* Funçaõ para Tormar o nome responsivo e apresentar as 2 primeras */
+}
+function NomeResponsivo({ nomeCompleto }) {
+  const iniciais = nomeCompleto
+    .split(" ")
+    .filter(Boolean)
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 2);
+
+  return (
+    <>
+      <p className="block sm:hidden">{iniciais.toUpperCase()}</p>
+      <p className="hidden max-w-20 truncate sm:block">{nomeCompleto}</p>
+    </>
+  );
+}
 
 const Header = () => {
   return (
-    <div className="shadow-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
-        <div className="flex items-center">
+    <header className="shadow-md">
+      {/* Bloco geral do header */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-8">
+        {/* Bloco da logo */}
+        <Link to="/" className="flex items-center">
           <img className="h-13 w-20" src="/Logo.png" alt="Logo" />
-          <p className="text-primary-400 font-montserrat font-extrabold">
+          {/*<p className="text-primary-400 font-montserrat hidden font-extrabold md:block">
             Sua proxíma parada na palma da mão
-          </p>
-        </div>
-        <div className="flex items-center rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md">
+          </p>*/}
+        </Link>
+        {/* Bloco da barra de pesquisa */}
+        <Link
+          to="/"
+          className="hidden items-center rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md lg:flex"
+        >
           <p className="border-r border-r-gray-300 pr-4">Qualquer lugar</p>
           <p className="border-r border-r-gray-300 px-4">Qualquer semana</p>
           <p className="px-4">Hóspede</p>
@@ -31,14 +57,17 @@ const Header = () => {
               />
             </svg>
           </div>
-        </div>
-
-        <div className="flex items-center gap-2 rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md">
+        </Link>
+        {/* Bloco do menu usuario */}
+        <Link
+          to="/Login"
+          className="flex items-center gap-2 rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="size-5 text-gray-600"
+            className="size-6 text-gray-600"
           >
             <path
               fillRule="evenodd"
@@ -60,10 +89,10 @@ const Header = () => {
             />
           </svg>
 
-          <p>Usuário</p>
-        </div>
+          <NomeResponsivo nomeCompleto="Usuário Adm" />
+        </Link>
       </div>
-    </div>
+    </header>
   );
 };
 
