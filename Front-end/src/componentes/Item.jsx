@@ -9,8 +9,8 @@ const Item = () => {
         alt="Imagem acomodação"
       />
       <div>
-        <h3 className="font-semibold  text-xl">Cabo frio, Rio de janeiro</h3>
-        <p className="truncate text-gray-600 text-1xl">
+        <h3 className="text-xl font-semibold">Cabo frio, Rio de janeiro</h3>
+        <p className="text-1xl truncate text-gray-600">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint pariatur
           minima reprehenderit amet, quasi dolor debitis dolore at eligendi.
           Quaerat quibusdam possimus ipsa nam ab doloremque quos eius eligendi
