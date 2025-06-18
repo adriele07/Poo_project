@@ -1,8 +1,6 @@
-from database import engine
+# back-end-python/init_db.py
+from db_manager import DBManager
 
-from models import Base
-import models.user, models.place, models.booking
-
-Base.metadata.create_all(bind=engine)
-
-print("Tabelas criadas com sucesso!")
+if __name__ == "__main__":
+    db = DBManager()
+    db.init_db()
