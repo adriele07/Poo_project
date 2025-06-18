@@ -27,8 +27,6 @@ E redireciona pra home quando o cadastro dá certo.
 Criei um .env no front-end com:
 
 env
-Copiar
-Editar
 VITE_AXIOS_BASE_URL=http://127.0.0.1:8000
 Assim todas as requisições já vão pro back certinho.
 
@@ -87,14 +85,6 @@ tailwindcss
 vite
 
 2. Como rodar o sistema
-Rodar o Back-end
-No terminal, execute:
-
-cd projeto-final/back-end
-uvicorn main:app --reload
-
-O back-end ficará disponível em:
-http://127.0.0.1:8000
 
 Rodar o Front-end
 Em outro terminal, execute:
@@ -104,6 +94,19 @@ npm run dev -- --port 5175
 
 O front-end ficará disponível em:
 http://localhost:5175
+
+Rodar o Back-end
+No terminal, execute:
+
+cd projeto-final/back-end
+uvicorn main:app --reload
+ou tente
+cd back-end && uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+O back-end ficará disponível em:
+http://127.0.0.1:8000
+
+
 
 3. Como ver o banco JSON funcionando
 Os dados dos usuários, produtos e vendas ficam nos arquivos:
