@@ -20,7 +20,9 @@ function NomeResponsivo({ nomeCompleto }) {
   );
 }
 
-const Header = () => {
+const Header = ({user}) => {
+  console.log(user);
+
   return (
     <header className="shadow-md">
       {/* Bloco geral do header */}
@@ -60,7 +62,7 @@ const Header = () => {
         </Link>
         {/* Bloco do menu usuario */}
         <Link
-          to="/Login"
+          to={user ? "/Account" : "/Login"}
           className="flex items-center gap-2 rounded-full border border-gray-300 py-2 pr-4 pl-6 shadow-md"
         >
           <svg
@@ -88,8 +90,13 @@ const Header = () => {
               clipRule="evenodd"
             />
           </svg>
+          
+          {user ? (
+            <NomeResponsivo nomeCompleto = {user.name}/>
+            ) : (
+              <></>
+            )}
 
-          <NomeResponsivo nomeCompleto="Usuário Adm" />
         </Link>
       </div>
     </header>
