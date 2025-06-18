@@ -106,7 +106,7 @@ cd back-end && uvicorn main:app --reload --host 0.0.0.0 --port 8000
 O back-end ficará disponível em:
 http://127.0.0.1:8000
 
-
+lembrando que meu notebook é sistema linux 
 
 3. Como ver o banco JSON funcionando
 Os dados dos usuários, produtos e vendas ficam nos arquivos:
