@@ -1,6 +1,6 @@
 # Poo_project
 
-Cayo, tive que mudar umas coisas no front-end e Vitório, adicionei umas paradas no banco de dados. A minha parte do back-end ficou assim:
+Cayo, tive que mudar umas coisas no front-end e Vitório, adicionei umas coisas no banco de dados. A minha parte do back-end ficou assim:
 
 O que eu mudei pra tudo funcionar direitinho:
 1. Login
