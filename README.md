@@ -174,11 +174,10 @@ Essa arquitetura permite que o sistema funcione de forma simples, didática e se
 - **Tratamento de erros:** Mensagens claras são retornadas ao front-end, e erros críticos são tratados para evitar vazamento de informações sensíveis.
 
 
-### Limitações e Sugestões de Melhorias
+### Limitações
 - **Concorrência:** O uso de arquivos JSON não é ideal para múltiplos acessos simultâneos; bancos relacionais resolvem isso.
 - **Escalabilidade:** Para muitos registros, o desempenho pode cair. Bancos como PostgreSQL ou MongoDB são recomendados para produção.
-- **Validação avançada:** Pode-se adicionar validações mais complexas e logs de auditoria.
-- **Testes automatizados:** Implementar testes unitários e de integração para garantir robustez.
+
 
 
 ### Estrutura dos Arquivos JSON (Exemplo)
