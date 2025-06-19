@@ -5,11 +5,16 @@
 # 1. Navegue até a pasta do projeto onde o script está localizado
 cd ~/../Poo_project-main/projeto
 
-# 2. Dê permissão de execução ao script (caso ainda não tenha)
+# 2. Dê permissão de execução ao script (caso ainda não tenha e esteja no linux, se for windows não é necessário)
 chmod +x start.sh
 
 # 3. Execute o script para iniciar o back-end e o front-end
-./start.sh
+(para linux)
+./start.sh 
+
+(para windows)
+.\start_project.bat
+
 
 ------------------------------------------------------------------------------------------------------------------
 Cayo, tive que mudar umas coisas no front-end e Vitório, adicionei umas coisas no banco de dados. A minha parte do back-end ficou assim:
