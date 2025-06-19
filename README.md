@@ -205,5 +205,8 @@ Essa arquitetura permite que o sistema funcione de forma simples, didática e se
 - [Python-Jose](https://python-jose.readthedocs.io/en/latest/)
 - [Axios](https://axios-http.com/)
 - [TailwindCSS](https://tailwindcss.com/)
+- Documentação automática da API disponível em `/docs` (Swagger UI) ao rodar o back-end
+
+
 
 
