@@ -19,9 +19,15 @@ function NomeResponsivo({ nomeCompleto }) {
     </>
   );
 }
+const Header = ({ user, setUser }) => {
+  // [Aqui também Cayo] Função de logout: remove o usuário do localStorage e do estado global.
+  // Isso garante que o usuário só saia ao clicar em "Sair".
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser && setUser(null);
+  };
 
-const Header = ({ user }) => {
-  console.log(user);
+
 
   return (
     <header className="shadow-md">
@@ -90,8 +96,12 @@ const Header = ({ user }) => {
               clipRule="evenodd"
             />
           </svg>
-          {user ? (
-            <NomeResponsivo nomeCompleto={user.name} />
+           {user ? (
+            <>
+              {/* [Aqui foi o ultimo  ] Botão de sair, visível apenas se o usuário estiver logado */}
+              <NomeResponsivo nomeCompleto={user.name || user.nome || "Usuário"} />
+              <button onClick={handleLogout} className="ml-2 text-xs text-red-500 underline">Sair</button>
+            </>
           ) : (
             <></>
           )}
