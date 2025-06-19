@@ -54,7 +54,6 @@ const Login = ({ user, setUser }) => {
             placeholder="Digite seu email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="rounded border px-3 py-2"
             required
           />
           <input
@@ -62,7 +61,7 @@ const Login = ({ user, setUser }) => {
             placeholder="Digete sua senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
-            className="rounded border px-3 py-2"
+            className="w-full rounded-full border border-gray-300 px-4 py-2"
             required
           />
           <button
