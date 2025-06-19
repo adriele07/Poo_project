@@ -88,9 +88,10 @@ vite
 
 Rodar o Front-end
 Em outro terminal, execute:
-
-cd projeto-final/front-end
-npm run dev -- --port 5175
+exemplo:
+cd C:\Users\informatica\Documents\GitHub\Poo_project\projeto\front-end
+npm install
+npm run dev
 
 O front-end ficará disponível em:
 http://localhost:5175
