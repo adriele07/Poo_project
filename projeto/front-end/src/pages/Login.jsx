@@ -18,6 +18,7 @@ const Login = ({ user, setUser }) => {
           senha,
         });
         setUser(userDoc);
+        localStorage.setItem("user", JSON.stringify(userDoc)); // [Adriele adicionou ] Salva o usuário no localStorage para manter login após F5
         setRedirect(true);
       } catch (error) {
         let msg = "Erro ao logar.";
