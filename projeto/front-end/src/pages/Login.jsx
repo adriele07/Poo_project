@@ -46,11 +46,12 @@ const Login = ({ user, setUser }) => {
   return (
     <section className="flex h-full items-center justify-center">
       <div className="mx-7 flex w-full max-w-96 flex-col items-center gap-4">
-        <h2 className="text-2xl font-bold">Login</h2>
-        <form className="flex w-full flex-col gap-4" onSubmit={handleSubmit}>
+        <h2 className="text-3xl font-bold">Faça seu login</h2>
+        <form className="flex w-full flex-col gap-2" onSubmit={handleSubmit}>
           <input
             type="email"
-            placeholder="Email"
+            className="w-full rounded-full border border-gray-300 px-4 py-2"
+            placeholder="Digite seu email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="rounded border px-3 py-2"
@@ -58,14 +59,17 @@ const Login = ({ user, setUser }) => {
           />
           <input
             type="password"
-            placeholder="Senha"
+            placeholder="Digete sua senha"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
             className="rounded border px-3 py-2"
             required
           />
-          <button type="submit" className="rounded bg-blue-600 py-2 text-white hover:bg-blue-700">
-            Entrar
+          <button
+            type="submit"
+            className="bg-primary-button w-full cursor-pointer rounded-full border border-gray-300 px-4 py-2 font-bold text-white"
+          >
+            Login
           </button>
         </form>
         {errorMsg && (
@@ -74,7 +78,10 @@ const Login = ({ user, setUser }) => {
           </div>
         )}
         <p>
-          Não tem conta? <Link to="/Register" className="text-blue-600">Cadastre-se</Link>
+          Ainda não tem uma conta?{" "}
+          <Link to="/Register" className="font-semibold underline">
+            Registre-se aqui!
+          </Link>
         </p>
       </div>
     </section>
