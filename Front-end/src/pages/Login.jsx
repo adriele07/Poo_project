@@ -51,7 +51,7 @@ const [redirect, setRedirect] = useState(false);
           <input
             type="password"
             className="w-full rounded-full border border-gray-300 px-4 py-2"
-            placeholder="Digete sua senha"
+            placeholder="Digite sua senha"
 
             value={password}
             onChange = {(e) => setPassword(e.target.value)}
