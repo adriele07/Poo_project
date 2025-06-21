@@ -1,19 +1,26 @@
 # Poo_project
+
+# Como executar o script start.sh
 -> Comandos para executar o programa:
-## Como executar o script start.sh
 
-# 1. Navegue até a pasta do projeto onde o script está localizado
+## 1. Navegue até a pasta do projeto onde o script está localizado
+```sh
 cd ~/../Poo_project-main/projeto
-
-# 2. Dê permissão de execução ao script (caso ainda não tenha e esteja no linux, se for windows não é necessário)
+```
+## 2. Dê permissão de execução ao script (caso ainda não tenha e esteja no linux, se for windows não é necessário)
+```sh
 chmod +x start.sh
+```
+## 3. Execute o script para iniciar o back-end e o front-end
+- **(para linux)**
+```sh
+./start.sh
+```
 
-# 3. Execute o script para iniciar o back-end e o front-end
-(para linux)
-./start.sh 
-
-(para windows)
+- **(para windows)**
+```sh
 .\start_project.bat
+```
 
 
 ------------------------------------------------------------------------------------------------------------------
