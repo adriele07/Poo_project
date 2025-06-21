@@ -1,10 +1,24 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile, File
+import os
 from schemas import PlaceCreate, PlaceOut
 from typing import List
 from db_manager import DBManager
 
 router = APIRouter(prefix="/places", tags=["places"])
 db_manager = DBManager()
+
+UPLOAD_DIR = os.path.join(os.path.dirname(__file__), '..', 'uploads')
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+@router.post("/upload", response_model=List[str])
+def upload_images(files: List[UploadFile] = File(...)):
+    saved_files = []
+    for file in files:
+        file_location = os.path.join(UPLOAD_DIR, file.filename)
+        with open(file_location, "wb") as f:
+            f.write(file.file.read())
+        saved_files.append(f"uploads/{file.filename}")
+    return saved_files
 
 @router.post("/", response_model=PlaceOut)
 def create_place(place: PlaceCreate):
