@@ -101,7 +101,7 @@ const Header = ({ user, isLoadingUser }) => {
             <div className="animate-spin h-5 w-5 border-2 border-t-transparent border-gray-600 rounded-full" />
           )}
           {showUser && (
-            <NomeResponsivo nomeCompleto={user.name || user.nome || "Usuário"} />
+            <NomeResponsivo nomeCompleto={user?.name || user?.nome || "Usuário"} />
           )}
         </Link>
       </div>

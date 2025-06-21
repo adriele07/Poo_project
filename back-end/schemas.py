@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import List, Optional
 
 class UserCreate(BaseModel):
     name: str
@@ -14,16 +14,18 @@ class UserOut(BaseModel):
         orm_mode = True
 
 class PlaceCreate(BaseModel):
+    id: Optional[int] = None
+    user_id: str
     title: str
     address: str
-    photos: Optional[str]
-    description: Optional[str]
-    perks: Optional[str]
-    extra_info: Optional[str]
-    check_in: Optional[str]
-    check_out: Optional[str]
-    max_guests: Optional[int]
-    price: Optional[float]
+    photos: List[str]
+    description: str
+    perks: List[str]
+    extras: str
+    price: float
+    checkin: str
+    checkout: str
+    person: int
 
 class PlaceOut(BaseModel):
     id: int
