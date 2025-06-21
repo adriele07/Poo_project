@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 
-const Perks = () => {
-  const [perks, setPerks] = useState("");
+const Perks = ({ selected, onChange }) => {
+  //console.log("Perks recebidos como selected:", selected);
 
   const handleClick = (target) => {
     const newPerks = target.checked
-      ? [...perks, target.value]
-      : [...perks].filter((perk) => perk !== target.value);
+      ? [...selected, target.value]
+      : selected.filter((perk) => perk !== target.value);
 
-    setPerks(newPerks);
+      //console.log("Perks atualizados (novo array):", newPerks);
+
+    onChange(newPerks); // Atualiza o estado no componente pai
   };
+
+  const isChecked = (name) => selected.includes(name);
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
       <label
         htmlFor="wifi"
-        className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
+        className="flex items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
       >
         <input
           type="checkbox"
+          className="cursor-pointer"
           id="wifi"
           value={"wifi"}
+          checked={isChecked("wifi")}
           onChange={(e) => handleClick(e.target)}
         />
         <svg
@@ -41,12 +47,14 @@ const Perks = () => {
       </label>
       <label
         htmlFor="parking"
-        className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
+        className="flex items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
       >
         <input
           type="checkbox"
+          className="cursor-pointer"
           id="parking"
           value={"parking"}
+          checked={isChecked("parking")}
           onChange={(e) => handleClick(e.target)}
         />
         <svg
@@ -67,12 +75,14 @@ const Perks = () => {
       </label>
       <label
         htmlFor="tv"
-        className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
+        className="flex items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
       >
         <input
           type="checkbox"
+          className="cursor-pointer"
           id="tv"
           value={"tv"}
+          checked={isChecked("tv")}
           onChange={(e) => handleClick(e.target)}
         />
         <svg
@@ -93,12 +103,14 @@ const Perks = () => {
       </label>
       <label
         htmlFor="radio"
-        className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
+        className="flex items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
       >
         <input
           type="checkbox"
+          className="cursor-pointer"
           id="radio"
           value={"radio"}
+          checked={isChecked("radio")}
           onChange={(e) => handleClick(e.target)}
         />
         <svg
@@ -119,12 +131,14 @@ const Perks = () => {
       </label>
       <label
         htmlFor="pet"
-        className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
+        className="flex items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
       >
         <input
           type="checkbox"
+          className="cursor-pointer"
           id="pet"
           value={"pet"}
+          checked={isChecked("pet")}
           onChange={(e) => handleClick(e.target)}
         />
         <svg
@@ -145,12 +159,14 @@ const Perks = () => {
       </label>
       <label
         htmlFor="security"
-        className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
+        className="flex items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
       >
         <input
           type="checkbox"
+          className="cursor-pointer"
           id="security"
           value={"security"}
+          checked={isChecked("security")}
           onChange={(e) => handleClick(e.target)}
         />
         <svg
@@ -171,12 +187,14 @@ const Perks = () => {
       </label>
       <label
         htmlFor="pool"
-        className="flex cursor-pointer items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
+        className="flex items-center gap-2 rounded-xl border border-gray-300 px-4 py-2"
       >
         <input
           type="checkbox"
+          className="cursor-pointer"
           id="pool"
           value={"pool"}
+          checked={isChecked("pool")}
           onChange={(e) => handleClick(e.target)}
         />
         <svg

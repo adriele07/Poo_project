@@ -6,7 +6,7 @@ from db_manager import DBManager
 router = APIRouter(prefix="/places", tags=["places"])
 db_manager = DBManager()
 
-@router.post("/", response_model=PlaceOut)
+@router.post("/places", response_model=PlaceOut)
 def create_place(place: PlaceCreate):
     # Exemplo de criação de produto usando DBManager
     produtos = db_manager.get_all_produtos()

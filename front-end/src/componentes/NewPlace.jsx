@@ -14,15 +14,54 @@ const NewPlace = () => {
   const [checkout, setCheckout] = useState("");
   const [person, setPerson] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [perks, setPerks] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    {/*console.log({
+      title,
+      address,
+      photos,
+      description,
+      perks,
+      extras,
+      checkin,
+      checkout,
+      person,
+      price,
+    });*/}
     try {
-      setRedirect(true);
+      const response = await fetch(
+        `${import.meta.env.VITE_AXIOS_BACK_URL}/places`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            address,
+            photos, // Ver comentário no final
+            description,
+            perks,
+            extras,
+            checkin,
+            checkout,
+            person,
+            price,
+          }),
+        },
+      );
+
+      if (response.ok) {
+        setRedirect(true);
+      } else {
+        alert("Erro ao criar nova acomodação!");
+      }
     } catch (error) {
-      console.error(JSON.stringify(error));
-      alert("Erro ao criar nova acomodação!");
+      console.error(error);
+      alert("Erro ao conectar ao servidor.");
     }
   };
 
@@ -173,7 +212,7 @@ const NewPlace = () => {
           Comodidades
         </label>
 
-        <Perks />
+        <Perks selected={perks} onChange={setPerks} />
       </div>
       <div className="flex flex-col gap-1">
         <label htmlFor="extras" className="ml-2 text-2xl font-bold">

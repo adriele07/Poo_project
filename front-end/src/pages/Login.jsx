@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import Spline from "@splinetool/react-spline";
 
 const Login = ({ user, setUser }) => {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const Login = ({ user, setUser }) => {
           senha,
         });
         setUser(userDoc);
-        localStorage.setItem("user", JSON.stringify(userDoc)); // [Adriele adicionou ] Salva o usuário no localStorage para manter login após F5
+        localStorage.setItem("user", JSON.stringify(userDoc)); // Salva o usuário no localStorage para manter login após F5
         setRedirect(true);
       } catch (error) {
         let msg = "Erro ao logar.";
@@ -45,8 +46,8 @@ const Login = ({ user, setUser }) => {
   }
 
   return (
-    <section className="flex h-full items-center justify-center">
-      <div className="mx-7 flex w-full max-w-96 flex-col items-center gap-4">
+    <section className="flex h-full flex-col items-center justify-center md:flex-row">
+      <div className="mx-6 flex mt-10 md:mt-0 w-full max-w-md flex-col items-center gap-4 md:mx-20">
         <h2 className="text-3xl font-bold">Faça seu login</h2>
         <form className="flex w-full flex-col gap-2" onSubmit={handleSubmit}>
           <input
@@ -73,7 +74,7 @@ const Login = ({ user, setUser }) => {
           </button>
         </form>
         {errorMsg && (
-          <div className="w-full rounded bg-red-100 px-3 py-2 text-red-700 text-sm text-center border border-red-300">
+          <div className="w-full rounded border border-red-300 bg-red-100 px-3 py-2 text-center text-sm text-red-700">
             {errorMsg}
           </div>
         )}
@@ -84,6 +85,11 @@ const Login = ({ user, setUser }) => {
           </Link>
         </p>
       </div>
+
+      <Spline
+        className="flex h-[400px] w-full items-center justify-center md:h-full md:w-1/2"
+        scene="https://prod.spline.design/mcNlCXKkC049EVep/scene.splinecode"
+      />
     </section>
   );
 };
