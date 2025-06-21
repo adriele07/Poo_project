@@ -20,20 +20,26 @@ const NewPlace = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Pega o usuário logado do localStorage
       const user = JSON.parse(localStorage.getItem("user"));
       if (!user || !user.id) {
         alert("Usuário não está logado. Faça login novamente.");
         return;
       }
       const user_id = user.id;
-      // Para fotos, vamos apenas salvar os nomes dos arquivos (ajuste para upload real se necessário)
-      const photosList = photoPreviews;
+      let uploadedPhotoPaths = [];
+      if (photos.length > 0) {
+        const formData = new FormData();
+        photos.forEach((file) => formData.append("files", file));
+        const uploadRes = await axios.post("http://localhost:8000/places/upload", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        uploadedPhotoPaths = uploadRes.data;
+      }
       await axios.post("http://localhost:8000/places/", {
         user_id: String(user_id),
         title: String(title),
         address: String(address),
-        photos: Array.isArray(photosList) ? photosList.map(String) : [],
+        photos: Array.isArray(uploadedPhotoPaths) ? uploadedPhotoPaths.map(String) : [],
         description: String(description),
         perks: Array.isArray(perks) ? perks.map(String) : [],
         extras: String(extras),
