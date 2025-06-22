@@ -79,18 +79,102 @@ Composto por um front-end em React (com Vite) e um back-end em Python utilizando
   - Toda operação de cadastro, login, listagem e venda lê e grava diretamente nesses arquivos
   - Não é necessário configurar ou instalar banco de dados relacional
 
-## Fluxos do Sistema
-### Cadastro de Usuário
-1. Usuário preenche nome, email e senha no front-end
-2. Front-end envia POST para `/usuarios`
-3. Back-end valida dados, verifica duplicidade e salva no `usuarios.json`
-4. Resposta de sucesso ou erro é exibida no front-end
+## Rotas REST Disponíveis
 
-### Login
-1. Usuário preenche email e senha
-2. Front-end envia POST para `/login`
-3. Back-end valida credenciais em `usuarios.json` e retorna token JWT se válido
-4. Front-end armazena token e permite acesso a áreas protegidas
+### Usuários
+- `POST /usuarios` — Cadastro de novo usuário (simples, sem hash de senha)
+- `GET /usuarios` — Lista todos os usuários
+- `POST /login` — Login simples (sem JWT, senha em texto puro)
+
+- `POST /users/register` — Cadastro de usuário com hash de senha (seguro)
+- `POST /users/login` — Login seguro, retorna JWT
+- `GET /users` — Lista todos os usuários (versão segura)
+
+### Produtos/Imóveis (Places)
+- `GET /produtos` — Lista todos os produtos
+- `GET /produtos/{id}` — Detalhes de um produto
+- `POST /places` — Cadastro de novo imóvel (place)
+- `GET /places` — Lista todos os imóveis
+- `POST /places/upload` — Upload de imagens (envio de arquivos)
+
+### Reservas (Bookings)
+- `POST /bookings` — Cria uma nova reserva
+- `GET /bookings` — Lista todas as reservas
+
+
+## Modelos de Dados (Schemas)
+- **UserCreate**: `{ name, email, password }`
+- **UserOut**: `{ id, name, email }`
+- **PlaceCreate**: `{ user_id, title, address, photos, description, perks, extras, price, checkin, checkout, person }`
+- **PlaceOut**: `{ id, title, address }`
+- **BookingCreate**: `{ user_id, place_id, check_in, check_out, price, guests }`
+- **BookingOut**: `{ id, user_id, place_id }`
+
+
+## Exemplos de Requisições
+
+### Cadastro de Usuário Seguro
+```http
+POST /users/register
+{
+  "name": "João",
+  "email": "joao@email.com",
+  "password": "123456"
+}
+```
+
+### Login Seguro
+```http
+POST /users/login
+{
+  "email": "joao@email.com",
+  "password": "123456"
+}
+// Resposta: { "access_token": "...", "token_type": "bearer" }
+```
+
+### Cadastro de Imóvel
+```http
+POST /places
+{
+  "user_id": "1",
+  "title": "Apartamento Central",
+  "address": "Rua X, 123",
+  "photos": ["uploads/foto1.png"],
+  "description": "Ótimo local!",
+  "perks": ["Wi-Fi", "Ar-condicionado"],
+  "extras": "Café da manhã",
+  "price": 200.0,
+  "checkin": "14:00",
+  "checkout": "12:00",
+  "person": 2
+}
+```
+
+### Upload de Imagens
+- Envie arquivos via multipart/form-data para `/places/upload`.
+
+### Criar Reserva
+```http
+POST /bookings
+{
+  "user_id": 1,
+  "place_id": 2,
+  "check_in": "2025-07-01",
+  "check_out": "2025-07-05",
+  "price": 800.0,
+  "guests": 2
+}
+```
+
+
+## Observações Importantes
+- O sistema possui duas formas de autenticação: uma simples (sem hash/JWT) e outra segura (com hash de senha e JWT).
+- Prefira sempre as rotas `/users/register` e `/users/login` para produção.
+- O upload de imagens salva os arquivos na pasta `uploads/` do back-end.
+- As reservas são persistidas em `vendas.json`.
+- Os modelos Pydantic garantem validação dos dados recebidos.
+
 
 
 ## Instalação e Execução
