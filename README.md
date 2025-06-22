@@ -174,7 +174,11 @@ POST /bookings
 - O upload de imagens salva os arquivos na pasta `uploads/` do back-end.
 - As reservas são persistidas em `vendas.json`.
 - Os modelos Pydantic garantem validação dos dados recebidos.
+- O campo `user_id` do cadastro de acomodações (places) serve apenas para identificar qual usuário criou a acomodação, mas o id da acomodação é independente do id do usuário.
 
+## Fluxos Adicionais
+- **Cadastro de imóvel:** O usuário deve estar cadastrado. O ID do usuário é enviado no campo `user_id`.
+- **Reserva:** O usuário e o imóvel devem existir. O sistema valida IDs antes de criar a reserva.
 
 
 ## Instalação e Execução
