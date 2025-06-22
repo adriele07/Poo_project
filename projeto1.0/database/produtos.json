@@ -1,81 +1,121 @@
 [
     {
         "id": 1,
-        "user_id": "1",
-        "nome": "acomodação1",
-        "endereco": "l",
+        "user_id": "2",
+        "nome": "",
+        "endereco": "",
         "fotos": [
-            "blob:http://localhost:5173/03995ea8-a1a7-40fa-be7a-dd0a65da48dc"
+            "uploads/Captura de tela de 2025-04-14 14-37-49.png"
         ],
-        "descricao": "descrição exemplo",
-        "perks": [
-            "wifi",
-            "pet"
-        ],
-        "extras": "nada",
-        "preco": 1.0,
-        "checkin": "2004-07-07",
-        "checkout": "2005-07-07",
+        "descricao": "",
+        "perks": [],
+        "extras": "",
+        "preco": 0.0,
+        "checkin": "",
+        "checkout": "",
         "pessoas": 1,
         "quantidade": 1
     },
     {
         "id": 2,
         "user_id": "2",
-        "nome": "wefwf",
-        "endereco": "wefwef",
+        "nome": "LUHIUD",
+        "endereco": "DHHTR",
         "fotos": [
-            "blob:http://localhost:5173/2a4f7703-79d7-438d-9562-0cba1d0b5058"
+            "uploads/Captura de tela de 2025-04-14 14-37-49.png"
         ],
-        "descricao": "efewf",
-        "perks": [
-            "wifi"
-        ],
-        "extras": "efqr",
-        "preco": 6.0,
-        "checkin": "2004-05-06",
-        "checkout": "2028-06-05",
-        "pessoas": 56,
+        "descricao": "",
+        "perks": [],
+        "extras": "",
+        "preco": 0.0,
+        "checkin": "",
+        "checkout": "",
+        "pessoas": 1,
         "quantidade": 1
     },
     {
         "id": 3,
-        "user_id": "1",
-        "nome": "wdwf",
-        "endereco": "efwef",
+        "user_id": "2",
+        "nome": "",
+        "endereco": "",
         "fotos": [
-            "blob:http://localhost:5173/5b8a5954-058f-4ba9-990c-c64a21f59075"
+            "uploads/photo.png"
         ],
-        "descricao": "gaeg",
-        "perks": [
-            "wifi",
-            "tv"
-        ],
-        "extras": "regerg",
-        "preco": 1.0,
-        "checkin": "2008-08-09",
-        "checkout": "2009-03-03",
+        "descricao": "",
+        "perks": [],
+        "extras": "",
+        "preco": 0.0,
+        "checkin": "",
+        "checkout": "",
         "pessoas": 1,
         "quantidade": 1
     },
     {
         "id": 4,
         "user_id": "2",
-        "nome": "ddhh",
-        "endereco": "kl",
+        "nome": "",
+        "endereco": "",
         "fotos": [
-            "blob:http://localhost:5173/1bca571c-6925-40ad-b3c7-57423e4e308d"
+            "uploads/Captura de tela de 2025-04-14 14-37-49.png"
         ],
-        "descricao": "fwf",
-        "perks": [
-            "wifi",
-            "pet"
+        "descricao": "",
+        "perks": [],
+        "extras": "",
+        "preco": 0.0,
+        "checkin": "",
+        "checkout": "",
+        "pessoas": 1,
+        "quantidade": 1
+    },
+    {
+        "id": 5,
+        "user_id": "2",
+        "nome": "",
+        "endereco": "",
+        "fotos": [
+            "uploads/photo.png"
         ],
-        "extras": "ugiug",
-        "preco": 44.0,
-        "checkin": "0005-03-31",
-        "checkout": "0064-07-06",
-        "pessoas": 4,
+        "descricao": "",
+        "perks": [],
+        "extras": "",
+        "preco": 0.0,
+        "checkin": "",
+        "checkout": "",
+        "pessoas": 1,
+        "quantidade": 1
+    },
+    {
+        "id": 6,
+        "user_id": "2",
+        "nome": "",
+        "endereco": "",
+        "fotos": [
+            "uploads/photo.png"
+        ],
+        "descricao": "",
+        "perks": [],
+        "extras": "",
+        "preco": 0.0,
+        "checkin": "",
+        "checkout": "",
+        "pessoas": 1,
+        "quantidade": 1
+    },
+    {
+        "id": 7,
+        "user_id": "2",
+        "nome": "",
+        "endereco": "",
+        "fotos": [
+            "uploads/A.png"
+        ],
+        "descricao": "",
+        "perks": [],
+        "extras": "",
+        "preco": 0.0,
+        "checkin": "",
+        "checkout": "",
+        "pessoas": 1,
         "quantidade": 1
     }
 ]
