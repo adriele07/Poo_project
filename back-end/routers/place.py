@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi import APIRouter, HTTPException, UploadFile, File, Body
 import os
 from schemas import PlaceCreate, PlaceOut
 from typing import List
@@ -19,6 +19,33 @@ def upload_images(files: List[UploadFile] = File(...)):
         with open(file_location, "wb") as f:
             f.write(file.file.read())
         saved_files.append(f"uploads/{file.filename}")
+    return saved_files
+
+@router.post("/upload/{user_id}/{post_id}", response_model=List[str])
+def upload_images(user_id: int, post_id: int, files: List[UploadFile] = File(...)):
+    produtos = db_manager.get_all_produtos()
+    post = next((p for p in produtos if int(p.get('id')) == int(post_id)), None)
+    if post and isinstance(post.get('fotos'), list):
+        existentes = len(post['fotos'])
+    else:
+        existentes = 0
+    saved_files = []
+    temp_files = []
+    for idx, file in enumerate(files, start=1):
+        ext = os.path.splitext(file.filename)[1]
+        numero = existentes + idx
+        new_filename = f"{user_id}-{post_id}-{numero}{ext}"
+        file_location = os.path.join(UPLOAD_DIR, new_filename)
+        with open(file_location, "wb") as f:
+            f.write(file.file.read())
+        saved_files.append(f"uploads/{new_filename}")
+        temp_files.append(file_location)
+    # Se o post não existe, remove as imagens recém-salvas e retorna erro
+    if not post:
+        for file_path in temp_files:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        raise HTTPException(status_code=404, detail="Acomodação não encontrada")
     return saved_files
 
 @router.post("/", response_model=PlaceOut)
@@ -146,10 +173,24 @@ def update_place(place_id: int, updated_place: PlaceUpdate):
 @router.delete("/{place_id}")
 def delete_place(place_id: int):
     produtos = db_manager.get_all_produtos()
+    deleted_produto = next((p for p in produtos if p["id"] == place_id), None)
     updated_produtos = [p for p in produtos if p["id"] != place_id]
 
-    if len(updated_produtos) == len(produtos):
+    if not deleted_produto:
         raise HTTPException(status_code=404, detail="Acomodação não encontrada")
+
+    # Remove as imagens do disco (tenta com diferentes caminhos)
+    fotos = deleted_produto.get("fotos", [])
+    for foto in fotos:
+        # Tenta remover pelo caminho completo
+        foto_path_full = Path(UPLOAD_DIR) / Path(foto)
+        if foto_path_full.exists():
+            os.remove(foto_path_full)
+            continue
+        # Tenta remover apenas pelo nome do arquivo
+        foto_path_name = Path(UPLOAD_DIR) / Path(foto).name
+        if foto_path_name.exists():
+            os.remove(foto_path_name)
 
     db_manager._escrever_dados(db_manager.produtos_path, updated_produtos)
     return {"message": "Acomodação excluída com sucesso"}
@@ -174,3 +215,24 @@ def list_all_places():
         }
         for p in produtos
     ]
+
+@router.post("/delete-images")
+def delete_images(images: list = Body(...)):
+    """
+    Remove imagens da pasta uploads.
+    Recebe uma lista de caminhos (ex: ["uploads/2-1-1.jpeg"]).
+    """
+    deleted = []
+    for img in images:
+        # Tenta remover pelo caminho completo
+        foto_path_full = Path(UPLOAD_DIR) / Path(img)
+        if foto_path_full.exists():
+            os.remove(foto_path_full)
+            deleted.append(str(foto_path_full))
+            continue
+        # Tenta remover apenas pelo nome do arquivo
+        foto_path_name = Path(UPLOAD_DIR) / Path(img).name
+        if foto_path_name.exists():
+            os.remove(foto_path_name)
+            deleted.append(str(foto_path_name))
+    return {"deleted": deleted}
