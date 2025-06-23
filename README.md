@@ -78,6 +78,18 @@ Composto por um front-end em React (com Vite) e um back-end em Python utilizando
 - **Funcionamento:**
   - Toda operação de cadastro, login, listagem e venda lê e grava diretamente nesses arquivos
   - Não é necessário configurar ou instalar banco de dados relacional
+- **Gerenciamento de Imagens e Acomodações:**
+  - O sistema foi projetado para permitir que usuários autenticados, atuando como anfitriões, cadastrem novas acomodações com detalhes e imagens personalizadas. O fluxo de trabalho técnico que integra as três camadas da aplicação é o seguinte:
+
+      * **Front-end:** A interface em React captura os dados do formulário, incluindo o arquivo de imagem selecionado pelo anfitrião, e envia essas informações para a API do back-end.
+      
+      * **API (Back-end):** Um endpoint específico recebe o arquivo de imagem e o armazena fisicamente na pasta `/uploads/` do projeto. Para garantir unicidade, o nome do arquivo é padronizado utilizando o `id` da nova acomodação (ex: `21.jpg`).
+      
+      * **Banco de Dados (JSON):** O back-end, após salvar a imagem, cria um novo registro para a acomodação no arquivo `produtos.json`. Este registro contém todas as informações textuais (título, preço) e, crucialmente, o caminho relativo para a imagem que acabou de ser salva no campo `fotos` (ex: `"uploads/21.jpg"`).
+      
+      * **Renderização:** Ao carregar a página principal, o front-end solicita a lista de acomodações, recebe os caminhos das imagens via API e os utiliza para requisitar e exibir a imagem correta para cada item, servida diretamente pelo back-end a partir da rota `/uploads`.
+      
+      Esta arquitetura centraliza o armazenamento e o gerenciamento de imagens no back-end, simplificando a lógica do front-end e mantendo a integridade das referências no banco de dados.
 
 ## Rotas REST Disponíveis
 
