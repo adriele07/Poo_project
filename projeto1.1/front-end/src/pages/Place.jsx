@@ -84,7 +84,16 @@ const Place = () => {
                 {place.perks.map((perk, index) => (
                   <li
                     key={index}
-                    className="rounded-full bg-gray-200 px-3 py-1 text-sm"
+                    className={`rounded-full px-3 py-1 text-sm ${
+                      perk.toLowerCase().includes("pet")
+                        ? ""
+                        : "bg-gray-200"
+                    }`}
+                    style={
+                      perk.toLowerCase().includes("pet")
+                        ? { backgroundColor: "rgb(255, 56, 93)", color: "#fff" }
+                        : {}
+                    }
                   >
                     {perk}
                   </li>
