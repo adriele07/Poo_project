@@ -63,7 +63,7 @@ def list_places_by_user(user_id: int):
             "address": p.get("endereco", ""),
             "photos": p.get("fotos", []),
             "description": p.get("descricao", ""),
-            "perks": p.get("perks", ""),
+            "perks": p.get("perks", []) if isinstance(p.get("perks", []), list) else [],
             "extras": p.get("extras", ""),
             "price": p.get("preco", 0),
             "checkin": p.get("checkin", ""),
@@ -74,6 +74,27 @@ def list_places_by_user(user_id: int):
     ]
 
     return user_places
+
+#retorna todos os lugares cadastrados
+@router.get("/all", response_model=List[PlaceOut])
+def list_all_places():
+    produtos = db_manager.get_all_produtos()
+    return [
+        {
+            "id": p.get("id", 0),
+            "title": p.get("nome", ""),
+            "address": p.get("endereco", ""),
+            "photos": p.get("fotos", []) if isinstance(p.get("fotos", []), list) else [],
+            "description": p.get("descricao", ""),
+            "perks": p.get("perks", []) if isinstance(p.get("perks", []), list) else [],
+            "extras": p.get("extras", ""),
+            "price": float(p.get("preco", 0)),
+            "checkin": p.get("checkin", ""),
+            "checkout": p.get("checkout", ""),
+            "person": int(p.get("pessoas", 1)),
+        }
+        for p in produtos
+    ]
 
 #retorna dados de um post especifico
 @router.get("/{place_id}", response_model=PlaceOut)
@@ -87,7 +108,7 @@ def get_place_by_id(place_id: int):
                 "address": p.get("endereco", ""),
                 "photos": p.get("fotos", []),
                 "description": p.get("descricao", ""),
-                "perks": p.get("perks", ""),
+                "perks": p.get("perks", []) if isinstance(p.get("perks", []), list) else [],
                 "extras": p.get("extras", ""),
                 "price": p.get("preco", 0),
                 "checkin": p.get("checkin", ""),
@@ -153,24 +174,3 @@ def delete_place(place_id: int):
 
     db_manager._escrever_dados(db_manager.produtos_path, updated_produtos)
     return {"message": "Acomodação excluída com sucesso"}
-
-#retorna todos os lugares cadastrados
-@router.get("/all", response_model=List[PlaceOut])
-def list_all_places():
-    produtos = db_manager.get_all_produtos()
-    return [
-        {
-            "id": p["id"],
-            "title": p["nome"],
-            "address": p.get("endereco", ""),
-            "photos": p.get("fotos", []),
-            "description": p.get("descricao", ""),
-            "perks": p.get("perks", ""),
-            "extras": p.get("extras", ""),
-            "price": p.get("preco", 0),
-            "checkin": p.get("checkin", ""),
-            "checkout": p.get("checkout", ""),
-            "person": p.get("pessoas", 1),
-        }
-        for p in produtos
-    ]

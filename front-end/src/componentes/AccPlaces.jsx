@@ -9,17 +9,6 @@ const AccPlaces = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.id;
 
-  {
-    /*useEffect(() => {
-    const axiosGet = async () => {
-      const{ data } = await axios.get("/")
-      setPlaces(data)
-    };
-
-    axiosGet()
-  }, []);*/
-  }
-
   useEffect(() => {
     if (!userId) return;
 
