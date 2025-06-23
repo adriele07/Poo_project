@@ -27,7 +27,7 @@ const NewPlace = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //Validador do formulário
+    // Validador do formulário: verifica se todos os campos obrigatórios estão preenchidos corretamente
     const erros = validarFormulario({
       title,
       address,
@@ -45,38 +45,60 @@ const NewPlace = () => {
     }
 
     try {
+      // Recupera o usuário logado do localStorage
       const user = JSON.parse(localStorage.getItem("user"));
       if (!user || !user.id) {
         alert("Usuário não está logado.");
         return;
       }
-
       const user_id = user.id;
-
       let uploadedPhotoPaths = [];
-
+      let postId = id;
+      // 1. Se for novo post, cria primeiro sem fotos (para obter o postId)
+      if (!postId) {
+        const payloadSemFotos = {
+          user_id: String(user_id),
+          title: String(title),
+          address: String(address),
+          photos: [],
+          deleted_photos: [],
+          description: String(description),
+          perks: Array.isArray(perks) ? perks.map(String) : [],
+          extras: String(extras),
+          price: parseFloat(price) || 0,
+          checkin: String(checkin),
+          checkout: String(checkout),
+          person: parseInt(person) || 1,
+        };
+        // Cria o post sem fotos e pega o id retornado
+        const res = await axios.post(
+          "http://localhost:8000/places/",
+          payloadSemFotos,
+        );
+        postId = res.data.id;
+      }
+      // 2. Upload das fotos para a rota correta, já com user_id e postId
       if (photos.length > 0) {
         const formData = new FormData();
         photos.forEach((file) => formData.append("files", file));
+        // Envia as imagens para o backend, que irá nomear corretamente
         const uploadRes = await axios.post(
-          "http://localhost:8000/places/upload",
+          `http://localhost:8000/places/upload/${user_id}/${postId}`,
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
           },
         );
-        uploadedPhotoPaths = uploadRes.data;
+        uploadedPhotoPaths = uploadRes.data; // Recebe os caminhos das imagens salvas
       }
-
+      // 3. Atualiza o post com as fotos (inclui fotos antigas e novas)
       const payload = {
         user_id: String(user_id),
         title: String(title),
         address: String(address),
         photos: [
           ...(Array.isArray(existingPhotos) ? existingPhotos.map(String) : []),
-          ...(Array.isArray(uploadedPhotoPaths)
-            ? uploadedPhotoPaths.map(String)
-            : []),
+          ...(Array.isArray(uploadedPhotoPaths) ? uploadedPhotoPaths.map(String) : []),
         ],
         deleted_photos: deletedExistingPhotos,
         description: String(description),
@@ -87,15 +109,11 @@ const NewPlace = () => {
         checkout: String(checkout),
         person: parseInt(person) || 1,
       };
-
-      if (id) {
-        await axios.put(`http://localhost:8000/places/${id}`, payload);
-      } else {
-        await axios.post("http://localhost:8000/places/", payload);
-      }
-
-      setRedirect(true);
+      // Atualiza o post com as informações finais
+      await axios.put(`http://localhost:8000/places/${postId}`, payload);
+      setRedirect(true); // Redireciona após sucesso
     } catch (error) {
+      // Exibe mensagem de erro detalhada caso ocorra falha
       let msg = "Erro ao salvar acomodação!\n";
       if (error?.response?.data?.detail) {
         if (typeof error.response.data.detail === "string") {
