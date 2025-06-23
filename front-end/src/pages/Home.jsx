@@ -1,6 +1,7 @@
 import Item from "../componentes/Item";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import FadeInLog from "../utils/FadeInLog";
 
 const Home = () => {
   const [places, setPlaces] = useState([]);
@@ -14,11 +15,13 @@ const Home = () => {
 
   return (
     <section>
-      <div className="mx-auto grid max-w-7xl grid-cols-[repeat(auto-fit,minmax(225px,1fr))] gap-8 px-4 py-8">
-        {places.map((place) => (
-          <Item key={place.id} place={place} />
-        ))}
-      </div>
+      <FadeInLog duration={800} delay={300}>
+        <div className="mx-auto grid max-w-7xl grid-cols-[repeat(auto-fit,minmax(225px,1fr))] gap-8 px-4 py-8">
+          {places.map((place) => (
+            <Item key={place.id} place={place} />
+          ))}
+        </div>
+      </FadeInLog>
     </section>
   );
 };

@@ -63,10 +63,21 @@ class BookingCreate(BaseModel):
     check_out: str
     price: float
     guests: int
+    titulo: str
+    endereco: str
+    foto: str
 
 class BookingOut(BaseModel):
     id: int
     user_id: int
     place_id: int
+    check_in: str
+    check_out: str
+    price: float
+    guests: int
+    titulo: str
+    endereco: str
+    foto: str   # <- novo campo
+
     class Config:
         orm_mode = True

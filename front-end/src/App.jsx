@@ -1,5 +1,6 @@
 import Header from "./componentes/Header";
 import Login from "./pages/Login";
+import Place from "./pages/Place";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
@@ -49,6 +50,7 @@ function App() {
             />
             <Route path="/account/places/new" element={<NewPlace />} />
             <Route path="/account/places/:id" element={<NewPlace />} />
+            <Route path="/places/:id" element={<Place />} />
           </Routes>
         </main>
       </BrowserRouter>

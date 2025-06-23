@@ -20,3 +20,19 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* classe utilitária seta no input */
+
+.input-no-spinner {
+  @apply appearance-none; /* Tailwind base */
+}
+
+.input-no-spinner::-webkit-outer-spin-button,
+.input-no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-no-spinner {
+  -moz-appearance: textfield;
+}
