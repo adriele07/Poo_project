@@ -45,7 +45,7 @@ const Place = () => {
       foto: place.photos[0], // ou com URL completa se preferir
     };
 
-    console.log("Reserva que será enviada:", reserva); // 👈 útil para debug
+    //console.log("Reserva que será enviada:", reserva); 
 
     try {
       await axios.post("http://localhost:8000/bookings", reserva);
@@ -102,9 +102,9 @@ const Place = () => {
         ))}
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-[2fr_1fr]">
+      <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2">
         {/* Descrição principal */}
-        <div>
+        <div className="p-6">
           <h2 className="mb-4 text-2xl font-semibold">Descrição</h2>
           <p className="leading-relaxed text-gray-800">{place.description}</p>
 
@@ -139,6 +139,10 @@ const Place = () => {
               <p className="text-gray-700">
                 <b>Check-Out: </b>
                 {place.checkin}
+              </p>
+              <p className="text-gray-700">
+                <b>Max. Convidados: </b>
+                {place.person}
               </p>
             </div>
           )}
@@ -175,6 +179,8 @@ const Place = () => {
             <input
               type="number"
               min={1}
+              max={place.person}
+              placeholder={place.person}
               value={guests}
               onChange={(e) => setGuests(e.target.value)}
               className="w-full cursor-text rounded-full border border-gray-300 px-4 py-2"
