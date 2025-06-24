@@ -95,9 +95,9 @@ def login(usuario: UsuarioLogin = Body(...)):
     - Se inválido, retorna erro 400.
     """
     user = db.get_usuario_by_email(usuario.email)
-    if not user or user["senha"] != usuario.senha:
+    if not user or user._password != usuario.senha:
         raise HTTPException(status_code=400, detail="Credenciais inválidas")
-    return {"id": user["id"], "nome": user["nome"], "email": user["email"]}
+    return {"id": user.id, "nome": user.name, "email": user.email}
 
 # Inclui os routers das demais funcionalidades
 # - place_router: rotas de acomodações (places)

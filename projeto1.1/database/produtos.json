@@ -1,1 +1,21 @@
-[]
+[
+    {
+        "id": 8,
+        "user_id": "1",
+        "nome": "vdhv",
+        "endereco": "Sarzedo mm",
+        "fotos": [
+            "uploads/1-8-3.jpeg"
+        ],
+        "descricao": "doe",
+        "perks": [
+            "wifi"
+        ],
+        "extras": "\\hfio",
+        "preco": 100.0,
+        "checkin": "2028-07-15",
+        "checkout": "2028-07-18",
+        "pessoas": 1,
+        "quantidade": 1
+    }
+]

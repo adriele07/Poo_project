@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "id": 5,
+        "user_id": 1,
+        "place_id": 8,
+        "check_in": "",
+        "check_out": "",
+        "price": 100.0,
+        "guests": 2,
+        "titulo": "vdhv",
+        "endereco": "Sarzedo mm",
+        "foto": "uploads/1-8-3.jpeg"
+    }
+]

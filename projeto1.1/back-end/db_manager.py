@@ -1,5 +1,6 @@
 import json
 import os
+from models import User, Booking
 
 class DBManager:
     """ Gerencia a leitura e escrita nos arquivos JSON do banco de dados. """
@@ -33,17 +34,42 @@ class DBManager:
 
     def get_usuario_by_email(self, email: str):
         for u in self._ler_dados(self.usuarios_path):
-            if u.get('email') == email: return u
+            if u.get('email') == email:
+                return User(
+                    id=u.get('id'),
+                    name=u.get('nome'),
+                    email=u.get('email'),
+                    password=u.get('senha')
+                )
         return None
 
     def create_usuario(self, usuario):
         usuarios = self._ler_dados(self.usuarios_path)
-        if self.get_usuario_by_email(usuario.email): return None
+        nome = getattr(usuario, 'name', None) or getattr(usuario, 'nome', None)
+        email = getattr(usuario, 'email', None)
+        senha = getattr(usuario, 'password', None) or getattr(usuario, 'senha', None) or getattr(usuario, '_password', None)
         novo_id = max([u.get('id', 0) for u in usuarios] + [0]) + 1
-        novo_usuario = {"id": novo_id, "nome": usuario.nome.title(), "email": usuario.email, "senha": usuario.senha}
+        if any(u.get('email') == email for u in usuarios): return None
+        novo_usuario = {
+            "id": novo_id,
+            "nome": nome.title() if nome else None,
+            "email": email,
+            "senha": senha
+        }
         usuarios.append(novo_usuario)
         self._escrever_dados(self.usuarios_path, usuarios)
         return novo_usuario
+
+    def get_all_bookings(self):
+        return [Booking.from_dict(b) for b in self._ler_dados(self.vendas_path)]
+
+    def create_booking(self, booking: Booking):
+        vendas = self._ler_dados(self.vendas_path)
+        novo_id = max([v.get('id', 0) for v in vendas] + [0]) + 1
+        booking.id = novo_id
+        vendas.append(booking.to_dict())
+        self._escrever_dados(self.vendas_path, vendas)
+        return booking
 
     def init_db(self):
         print("Populando o banco de dados com valores padrão...")
