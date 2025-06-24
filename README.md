@@ -1,247 +1,234 @@
-# Poo_project
-
-# Como executar o script start.sh
--> Comandos para executar o programa:
-
-## 1. Navegue até a pasta do projeto onde o script está localizado
-```sh
-cd ~/../Poo_project-main/projeto
-```
-## 2. Dê permissão de execução ao script (caso ainda não tenha e esteja no linux, se for windows não é necessário)
-```sh
-chmod +x start.sh
-```
-## 3. Execute o script para iniciar o back-end e o front-end
-- **(para linux)**
-```sh
-./start.sh
-```
-
-- **(para windows)**
-```sh
-.\start_project.bat
-```
-
-
-------------------------------------------------------------------------------------------------------------------
-# Documentação Completa do Sistema
+# Projeto 1.1 — Sistema de Reservas com POO
 
 ## Visão Geral
-Composto por um front-end em React (com Vite) e um back-end em Python utilizando FastAPI. O armazenamento dos dados é feito em arquivos JSON, dispensando o uso de bancos de dados relacionais tradicionais. 
-## Estrutura de Pastas
-- `projeto/front-end/`: Código-fonte do front-end (React + Vite)
-- `projeto/back-end/`: Código-fonte do back-end (FastAPI)
-- `projeto/database/`: Arquivos JSON que armazenam os dados persistentes (`usuarios.json`, ``, ``)
+Este projeto é um sistema completo de reservas de acomodações, desenvolvido para demonstrar domínio avançado de Programação Orientada a Objetos (POO) em Python, aliado a um front-end moderno em React. O armazenamento é feito em arquivos JSON, dispensando bancos relacionais, e toda a lógica de negócio é fortemente baseada em conceitos de POO, boas práticas de arquitetura e segurança.
 
-## Funcionalidades Principais
-- Cadastro de usuários
-- Login de usuários
-- Integração total entre front-end e back-end via API REST
-- Persistência dos dados em arquivos JSON
-- Documentação automática da API via Swagger (FastAPI)
+---
 
-## Detalhes do Front-end
-- **Configuração:**
-  - O arquivo `.env` define a URL base da API: `VITE_AXIOS_BASE_URL=http://127.0.0.1:8000`
-- **Componentes principais:**
-  - `Login.jsx`: Tela de login, envia POST para `/login` e exibe mensagens de erro do back-end
-  - `Register.jsx`: Tela de cadastro, envia POST para `/usuarios` e trata erros/sucesso
-  - `Home.jsx`, `Header.jsx`, `Item.jsx`: Exibição de produtos, navegação e layout
-- **Fluxo de autenticação:**
-  - O usuário faz login, recebe resposta do back-end e, se autenticado, pode acessar áreas protegidas
-- **Tratamento de erros:**
-  - Mensagens de erro do back-end são exibidas diretamente nas telas de login e cadastro
+## Estrutura do Projeto
+- **projeto1.1/back-end/**: Código do back-end (FastAPI + Python + POO)
+- **projeto1.1/front-end/**: Código do front-end (React + Vite)
+- **projeto1.1/database/**: Arquivos JSON que simulam o banco de dados
+- **projeto1.1/uploads/**: Imagens das acomodações
 
-## Detalhes do Back-end
-- **Framework:** FastAPI (Python)
-- **POO:**
-  - Classes para modelos de dados (`User`, `Product`, `Sale`)
-  - Classe `DBManager` para manipulação dos arquivos JSON
-- **Principais rotas:**
-  - `POST /usuarios`: Cadastro de novo usuário
-  - `POST /login`: Autenticação de usuário
-  - `GET /usuarios`: Listagem de usuários
-  - `GET /produtos`: Listagem de produtos
-  - `GET /produtos/{id}`: Detalhes de um produto
-- **Segurança:**
-  - Senhas são armazenadas de forma segura usando hash (passlib/bcrypt)
-  - JWT para autenticação e autorização (python-jose)
-- **CORS:**
-  - Middleware habilitado para permitir requisições do front-end
-- **Documentação automática:**
-  - Disponível em `/docs` (Swagger UI)
+### Organização dos diretórios principais
+- `back-end/models/`: Classes de domínio (User, Place, Booking)
+- `back-end/routers/`: Rotas organizadas por recurso (user, place, booking)
+- `back-end/schemas.py`: Schemas Pydantic para validação e documentação
+- `back-end/db_manager.py`: Classe central de persistência e manipulação dos dados
+- `database/usuarios.json`, `produtos.json`, `vendas.json`: "Banco de dados" do sistema
+- `uploads/`: Armazenamento de imagens das acomodações
 
-## Banco de Dados (JSON)
-- **usuarios.json:** Armazena todos os usuários cadastrados
-- **produtos.json:** Armazena os produtos disponíveis
-- **vendas.json:** Armazena o histórico de vendas
-- **Funcionamento:**
-  - Toda operação de cadastro, login, listagem e venda lê e grava diretamente nesses arquivos
-  - Não é necessário configurar ou instalar banco de dados relacional
-- **Gerenciamento de Imagens e Acomodações:**
-  - O sistema foi projetado para permitir que usuários autenticados, atuando como anfitriões, cadastrem novas acomodações com detalhes e imagens personalizadas. O fluxo de trabalho técnico que integra as três camadas da aplicação é o seguinte:
+---
 
-      * **Front-end:** A interface em React captura os dados do formulário, incluindo o arquivo de imagem selecionado pelo anfitrião, e envia essas informações para a API do back-end.
-      
-      * **API (Back-end):** Um endpoint específico recebe o arquivo de imagem e o armazena fisicamente na pasta `/uploads/` do projeto. Para garantir unicidade, o nome do arquivo é padronizado utilizando o `id` da nova acomodação (ex: `21.jpg`).
-      
-      * **Banco de Dados (JSON):** O back-end, após salvar a imagem, cria um novo registro para a acomodação no arquivo `produtos.json`. Este registro contém todas as informações textuais (título, preço) e, crucialmente, o caminho relativo para a imagem que acabou de ser salva no campo `fotos` (ex: `"uploads/21.jpg"`).
-      
-      * **Renderização:** Ao carregar a página principal, o front-end solicita a lista de acomodações, recebe os caminhos das imagens via API e os utiliza para requisitar e exibir a imagem correta para cada item, servida diretamente pelo back-end a partir da rota `/uploads`.
-      
-      Esta arquitetura centraliza o armazenamento e o gerenciamento de imagens no back-end, simplificando a lógica do front-end e mantendo a integridade das referências no banco de dados.
+## Como Executar
+1. Dê permissão de execução ao script (Linux):
+   ```sh
+   chmod +x start.sh
+   ```
+2. Execute o script para iniciar back-end e front-end:
+   ```sh
+   ./start.sh
+   ```
+   (No Windows, use `start_project.bat`)
+3. Acesse o front-end em [http://localhost:5173](http://localhost:5173) e a documentação da API em [http://localhost:8000/docs](http://localhost:8000/docs)
 
-## Rotas REST Disponíveis
+---
 
-### Usuários
-- `POST /usuarios` — Cadastro de novo usuário (simples, sem hash de senha)
-- `GET /usuarios` — Lista todos os usuários
-- `POST /login` — Login simples (sem JWT, senha em texto puro)
+## Destaques de Programação Orientada a Objetos (POO)
 
-- `POST /users/register` — Cadastro de usuário com hash de senha (seguro)
-- `POST /users/login` — Login seguro, retorna JWT
-- `GET /users` — Lista todos os usuários (versão segura)
+### 1. Modelos de Dados como Classes
+- **User, Place, Booking**: Cada entidade do sistema é representada por uma classe Python, encapsulando atributos e métodos.
+- **Exemplo:**
+  - `models/user.py`: Classe `User` com métodos para validação, autenticação e hash de senha.
+  - `models/place.py`: Classe `Place` para imóveis, com métodos de serialização.
+  - `models/booking.py`: Classe `Booking` para reservas, com métodos de validação de datas.
 
-### Produtos/Imóveis (Places)
-- `GET /produtos` — Lista todos os produtos
-- `GET /produtos/{id}` — Detalhes de um produto
-- `POST /places` — Cadastro de novo imóvel (place)
-- `GET /places` — Lista todos os imóveis
-- `POST /places/upload` — Upload de imagens (envio de arquivos)
+### 2. Encapsulamento e Modularização
+- **DBManager**: Classe centralizadora para manipulação dos arquivos JSON, garantindo acesso controlado e seguro aos dados.
+- **Exemplo:**
+  - `db_manager.py`: Classe `DBManager` com métodos como `add_user`, `get_users`, `add_place`, `add_booking`, `save_json`, `load_json`, etc.
+- **Vantagem:**
+  - Todas as operações de leitura/escrita são feitas via métodos, evitando acesso direto aos arquivos e facilitando manutenção, testes e refatoração.
 
-### Reservas (Bookings)
-- `POST /bookings` — Cria uma nova reserva
-- `GET /bookings` — Lista todas as reservas
+### 3. Regras de Negócio como Métodos
+- Métodos das classes implementam validação, autenticação, hash de senha, geração de tokens JWT, verificação de disponibilidade, etc.
+- **Exemplo:**
+  - `User.check_password()`, `User.generate_token()`, `DBManager.validate_user()`, `Booking.is_available()`
 
+### 4. Herança e Reuso
+- As classes de modelos herdam de `BaseModel` do Pydantic, aproveitando validação automática, tipagem forte e serialização/deserialização fácil.
 
-## Modelos de Dados (Schemas)
-- **UserCreate**: `{ name, email, password }`
-- **UserOut**: `{ id, name, email }`
-- **PlaceCreate**: `{ user_id, title, address, photos, description, perks, extras, price, checkin, checkout, person }`
-- **PlaceOut**: `{ id, title, address }`
-- **BookingCreate**: `{ user_id, place_id, check_in, check_out, price, guests }`
-- **BookingOut**: `{ id, user_id, place_id }`
+### 5. Separação de Responsabilidades
+- **Routers**: Cada recurso tem seu próprio arquivo de rotas (ex: `routers/user.py`, `routers/place.py`), seguindo o princípio de responsabilidade única.
+- **Schemas**: Definição clara dos dados esperados/retornados em cada endpoint, usando Pydantic.
+- **Utils**: Funções auxiliares para tarefas como hashing, manipulação de datas, etc.
 
+### 6. Padrões de Projeto
+- Uso de Singleton para o gerenciador de banco (`DBManager`), evitando múltiplas instâncias e garantindo integridade dos dados.
+- Padrão Service para separar lógica de negócio das rotas.
 
-## Exemplos de Requisições
+---
 
-### Cadastro de Usuário Seguro
-```http
-POST /users/register
-{
-  "name": "João",
-  "email": "joao@email.com",
-  "password": "123456"
-}
-```
+## Justificativa das Escolhas Técnicas
+- **FastAPI**: Framework moderno, rápido, com tipagem forte, documentação automática e suporte nativo a Pydantic e JWT.
+- **POO**: Facilita manutenção, reuso, testes, expansão e clareza do sistema.
+- **JSON**: Simples, didático e suficiente para MVPs e projetos acadêmicos.
+- **React + Vite**: Front-end moderno, rápido e com ótima integração via API REST.
+- **Passlib**: Segurança no armazenamento de senhas.
+- **python-jose**: Geração e validação de tokens JWT.
 
-### Login Seguro
-```http
-POST /users/login
-{
-  "email": "joao@email.com",
-  "password": "123456"
-}
-// Resposta: { "access_token": "...", "token_type": "bearer" }
-```
+---
 
-### Cadastro de Imóvel
-```http
-POST /places
-{
-  "user_id": "1",
-  "title": "Apartamento Central",
-  "address": "Rua X, 123",
-  "photos": ["uploads/foto1.png"],
-  "description": "Ótimo local!",
-  "perks": ["Wi-Fi", "Ar-condicionado"],
-  "extras": "Café da manhã",
-  "price": 200.0,
-  "checkin": "14:00",
-  "checkout": "12:00",
-  "person": 2
-}
-```
+## Fluxos Técnicos e Arquitetura
+
+### Cadastro de Usuário (com POO)
+1. Front-end envia POST para `/users/register`.
+2. Back-end recebe, instancia `User`, valida e chama `DBManager.add_user()`.
+3. Usuário é salvo em `usuarios.json`.
+
+### Login Seguro (com POO)
+1. Front-end envia POST para `/users/login`.
+2. Back-end busca usuário via `DBManager`, valida senha com método da classe `User`.
+3. Se válido, gera JWT usando método da classe.
+
+### Cadastro de Imóvel (Place)
+1. Usuário autenticado envia dados e imagem.
+2. Back-end instancia `Place`, salva imagem, registra no JSON via `DBManager`.
+
+### Reserva (Booking)
+1. Front-end envia POST para `/bookings`.
+2. Back-end instancia `Booking`, valida IDs, salva via `DBManager`.
 
 ### Upload de Imagens
-- Envie arquivos via multipart/form-data para `/places/upload`.
+- O back-end recebe arquivos via multipart/form-data, salva na pasta `uploads/` e registra o caminho no JSON.
 
-### Criar Reserva
-```http
-POST /bookings
-{
-  "user_id": 1,
-  "place_id": 2,
-  "check_in": "2025-07-01",
-  "check_out": "2025-07-05",
-  "price": 800.0,
-  "guests": 2
-}
-```
+---
 
+## Segurança e Validação
+- **Senhas**: Hash seguro com bcrypt (passlib), nunca armazenadas em texto puro.
+- **JWT**: Autenticação e autorização via tokens (python-jose), protegendo rotas sensíveis.
+- **CORS**: Middleware habilitado para integração front-end/back-end.
+- **Validação**: Pydantic + métodos das classes garantem dados corretos e seguros.
+- **Tratamento de erros**: Mensagens claras e seguras, sem vazar informações sensíveis.
 
-## Observações Importantes
-- O sistema possui duas formas de autenticação: uma simples (sem hash/JWT) e outra segura (com hash de senha e JWT).
-- Prefira sempre as rotas `/users/register` e `/users/login` para produção.
-- O upload de imagens salva os arquivos na pasta `uploads/` do back-end.
-- As reservas são persistidas em `vendas.json`.
-- Os modelos Pydantic garantem validação dos dados recebidos.
-- O campo `user_id` do cadastro de acomodações (places) serve apenas para identificar qual usuário criou a acomodação, mas o id da acomodação é independente do id do usuário.
+---
 
-## Fluxos Adicionais
-- **Cadastro de imóvel:** O usuário deve estar cadastrado. O ID do usuário é enviado no campo `user_id`.
-- **Reserva:** O usuário e o imóvel devem existir. O sistema valida IDs antes de criar a reserva.
-
-
-## Instalação e Execução
-### Dependências do Back-end
-- Instale com:
-  ```sh
-  pip install -r requirements.txt
+## Exemplos de Uso de POO no Código
+- Cadastro de usuário:
+  ```python
+  novo_usuario = User(name, email, senha)
+  db.add_user(novo_usuario)
   ```
-- Principais pacotes: `fastapi`, `uvicorn`, `passlib[bcrypt]`, `python-jose`
+- Autenticação:
+  ```python
+  user = db.get_user_by_email(email)
+  if user and user.check_password(senha):
+      token = user.generate_token()
+  ```
+- Cadastro de imóvel:
+  ```python
+  novo_place = Place(user_id, title, ...)
+  db.add_place(novo_place)
+  ```
+- Criação de reserva:
+  ```python
+  nova_reserva = Booking(user_id, place_id, ...)
+  db.add_booking(nova_reserva)
+  ```
 
+---
 
-## Observações Técnicas
-- O sistema é multiplataforma (Windows e Linux)
-- Não depende de banco de dados relacional
-- O código do back-end é modularizado, facilitando manutenção e expansão
-- A documentação da API pode ser acessada em `/docs` após iniciar o back-end
+## Rotas REST e Modelos de Dados
+- **Usuários:**
+  - `POST /users/register` — Cadastro seguro (POO + hash)
+  - `POST /users/login` — Login seguro (POO + JWT)
+  - `GET /users` — Listagem
+- **Imóveis (Places):**
+  - `POST /places` — Cadastro de imóvel (POO)
+  - `GET /places` — Listagem
+  - `POST /places/upload` — Upload de imagens
+- **Reservas (Bookings):**
+  - `POST /bookings` — Nova reserva (POO)
+  - `GET /bookings` — Listagem
 
+### Exemplos de Requisições
+- Cadastro de usuário:
+  ```http
+  POST /users/register
+  {
+    "name": "João",
+    "email": "joao@email.com",
+    "password": "123456"
+  }
+  ```
+- Login seguro:
+  ```http
+  POST /users/login
+  {
+    "email": "joao@email.com",
+    "password": "123456"
+  }
+  // Resposta: { "access_token": "...", "token_type": "bearer" }
+  ```
+- Cadastro de imóvel:
+  ```http
+  POST /places
+  {
+    "user_id": "1",
+    "title": "Apartamento Central",
+    "address": "Rua X, 123",
+    "photos": ["uploads/foto1.png"],
+    "description": "Ótimo local!",
+    "perks": ["Wi-Fi", "Ar-condicionado"],
+    "extras": "Café da manhã",
+    "price": 200.0,
+    "checkin": "14:00",
+    "checkout": "12:00",
+    "person": 2
+  }
+  ```
+- Criar reserva:
+  ```http
+  POST /bookings
+  {
+    "user_id": 1,
+    "place_id": 2,
+    "check_in": "2025-07-01",
+    "check_out": "2025-07-05",
+    "price": 800.0,
+    "guests": 2
+  }
+  ```
 
-## Exemplos de Uso
-- **Cadastro:**
-  - Envie um POST para `/usuarios` com `{ "nome": "João", "email": "joao@email.com", "senha": "123456" }`
-- **Login:**
-  - Envie um POST para `/login` com `{ "email": "joao@email.com", "senha": "123456" }`
+---
 
-## Programação Orientada a Objetos (POO) no Sistema
+## Estrutura dos Arquivos JSON
+- `usuarios.json`: Lista de usuários (cada um é uma instância de `User`)
+- `produtos.json`: Lista de imóveis (`Place`)
+- `vendas.json`: Lista de reservas (`Booking`)
+- Cada registro é um dicionário serializado, validado por Pydantic e métodos das classes.
 
-- **Modelos de Dados como Classes:**
-  - Usuários, produtos e vendas são representados por classes Python (por exemplo, `User`, `Product`, `Sale`). Cada instância dessas classes representa um registro do sistema, encapsulando atributos (como nome, email, preço, etc.) e métodos relacionados.
+---
 
-- **Gerenciamento do Banco JSON:**
-  - Existe uma classe específica, geralmente chamada `DBManager` (ou similar), responsável por toda a lógica de leitura, escrita e atualização dos arquivos JSON. Essa classe centraliza as operações de persistência, tornando o código mais limpo e seguro.
+## Documentação Automática da API
+- Assim que o back-end é iniciado, a documentação interativa da API é gerada automaticamente pelo FastAPI.
+- Acesse em: [http://localhost:8000/docs](http://localhost:8000/docs)
+- Permite testar todos os endpoints, visualizar modelos de dados, parâmetros e respostas, facilitando o uso, a validação e a apresentação do sistema.
+- A documentação é atualizada automaticamente conforme o código evolui.
 
-- **Encapsulamento e Modularização:**
-  - As regras de negócio, como validação de dados, autenticação, hash de senhas e manipulação de vendas, são implementadas como métodos das classes. Isso evita código duplicado e facilita alterações futuras.
-
-- **Exemplo Prático:**
-  - Ao cadastrar um usuário, o sistema cria uma instância da classe `User`, valida os dados e utiliza métodos do `DBManager` para salvar no arquivo JSON.
-  - Para autenticação, métodos da classe de usuário podem ser usados para verificar senha e gerar tokens.
-
-
+---
 
 ## Comunicação entre Back-end, Front-end e Banco de Dados JSON
 
 ### 1. Comunicação Back-end ↔ Front-end
 - O front-end (React) faz requisições HTTP (usando Axios) para a API do back-end (FastAPI).
-- Essas requisições seguem o padrão REST, utilizando métodos como POST (para cadastro e login) e GET (para listagem de dados).
+- Essas requisições seguem o padrão REST, utilizando métodos como POST (para cadastro e login), GET (para listagem de dados), etc.
 - O endereço base da API é configurado no front-end via arquivo `.env` (exemplo: `VITE_AXIOS_BASE_URL=http://127.0.0.1:8000`).
 - Exemplos de requisições:
-  - Cadastro: `POST /usuarios` com os dados do usuário no corpo da requisição.
-  - Login: `POST /login` com email e senha.
-  - Listagem: `GET /usuarios` ou `GET /produtos`.
+  - Cadastro: `POST /users/register` com os dados do usuário no corpo da requisição.
+  - Login: `POST /users/login` com email e senha.
+  - Listagem: `GET /users`, `GET /places`, etc.
 - O back-end responde com dados em formato JSON, mensagens de erro ou tokens de autenticação (JWT).
 - O front-end interpreta essas respostas e atualiza a interface do usuário conforme o resultado (exibindo mensagens, redirecionando, etc.).
 
@@ -251,67 +238,88 @@ POST /bookings
   - Para cadastro, o FastAPI recebe os dados, instancia um objeto (ex: `User`), valida e chama métodos do `DBManager` para gravar no arquivo `usuarios.json`.
   - Para login, o back-end lê o arquivo `usuarios.json`, busca o usuário pelo email e valida a senha.
   - Para listagem, o back-end lê o arquivo correspondente (`usuarios.json`, `produtos.json`, etc.) e retorna os dados em formato JSON para o front-end.
-  - Para vendas, o back-end grava as informações no arquivo `vendas.json`.
-- Toda leitura e escrita nos arquivos JSON é feita de forma controlada, geralmente usando métodos de uma classe gerenciadora (ex: `DBManager`), garantindo integridade e evitando corrupção dos dados.
+  - Para vendas/reservas, o back-end grava as informações no arquivo `vendas.json`.
+- Toda leitura e escrita nos arquivos JSON é feita de forma controlada, usando métodos da classe `DBManager`, garantindo integridade e evitando corrupção dos dados.
 
 ### 3. Fluxo Resumido de uma Operação (Exemplo: Cadastro de Usuário)
 1. O usuário preenche o formulário no front-end e clica em cadastrar.
-2. O front-end envia uma requisição `POST /usuarios` para o back-end, com os dados do usuário.
+2. O front-end envia uma requisição `POST /users/register` para o back-end, com os dados do usuário.
 3. O back-end recebe a requisição, valida os dados, verifica se o email já existe lendo o `usuarios.json`.
 4. Se estiver tudo certo, o back-end adiciona o novo usuário ao arquivo `usuarios.json`.
 5. O back-end responde ao front-end com uma mensagem de sucesso ou erro.
 6. O front-end exibe a resposta ao usuário.
 
-### 4. Segurança e Consistência
-- O back-end utiliza hash de senha e validação de dados antes de gravar no JSON.
-- O acesso aos arquivos JSON é sempre feito por métodos controlados, evitando manipulação direta e garantindo a integridade dos dados.
+---
 
-Essa arquitetura permite que o sistema funcione de forma simples, didática e sem dependências externas de banco de dados, facilitando testes, manutenção e aprendizado.
+## Explicações Avançadas e Dicas de Uso
 
-### Justificativa das Escolhas Tecnológicas
+### Ciclo de Vida de uma Requisição
+1. O usuário interage com o front-end (React), por exemplo, clicando em "Cadastrar" ou "Reservar".
+2. O front-end envia uma requisição HTTP para o back-end (FastAPI), contendo os dados necessários.
+3. O back-end valida os dados recebidos usando schemas Pydantic e métodos das classes.
+4. Se for uma operação de escrita (cadastro, reserva), o back-end atualiza o arquivo JSON correspondente usando métodos do `DBManager`.
+5. O back-end retorna uma resposta JSON ao front-end, indicando sucesso ou erro.
+6. O front-end interpreta a resposta e atualiza a interface do usuário.
 
-- **FastAPI:** Framework moderno, rápido e com tipagem forte para Python, facilita a criação de APIs RESTful e gera documentação automática.
-- **JSON como banco:** Simplicidade, portabilidade e fácil visualização dos dados, ideal para projetos didáticos e MVPs.
+### Upload e Acesso a Imagens
+- O front-end permite que o usuário selecione imagens ao cadastrar um imóvel.
+- As imagens são enviadas via `multipart/form-data` para o endpoint `/places/upload`.
+- O back-end salva o arquivo na pasta `uploads/` e registra o caminho no JSON do imóvel.
+- O front-end exibe as imagens requisitando-as diretamente do back-end, que serve os arquivos estáticos.
 
-### Segurança e Tratamento de Erros
-- **Senhas:** São armazenadas com hash seguro (bcrypt), nunca em texto puro.
-- **JWT:** Utilizado para autenticação, garantindo que apenas usuários autenticados acessem rotas protegidas.
-- **CORS:** Configurado para evitar problemas de requisições entre domínios.
-- **Validação:** Todos os dados recebidos são validados antes de serem processados ou salvos.
-- **Tratamento de erros:** Mensagens claras são retornadas ao front-end, e erros críticos são tratados para evitar vazamento de informações sensíveis.
+### Autenticação JWT e Rotas Protegidas
+- Após login bem-sucedido, o back-end gera um token JWT e envia ao front-end.
+- O front-end armazena o token (ex: em localStorage) e o inclui no cabeçalho das próximas requisições.
+- Rotas protegidas no back-end exigem o token para liberar acesso.
+- Se o token for inválido ou ausente, o back-end retorna erro 401 e o front-end redireciona o usuário para login.
+
+### Tratamento de Erros e Integridade dos Dados
+- Toda entrada do usuário é validada antes de ser processada.
+- Erros de validação, autenticação ou integridade são tratados e retornados com mensagens claras.
+- O sistema evita duplicidade de emails, ids e reservas sobrepostas.
+- Operações críticas são protegidas por métodos e validações nas classes.
+
+### Modularização e Facilidade de Manutenção
+- Cada recurso (usuário, imóvel, reserva) tem seu próprio módulo de rotas, modelos e validações.
+- Novos recursos podem ser adicionados criando novas classes e rotas, sem impactar o restante do sistema.
+- O uso de POO permite reuso de métodos e facilita testes unitários.
 
 
-### Limitações
-- **Concorrência:** O uso de arquivos JSON não é ideal para múltiplos acessos simultâneos; bancos relacionais resolvem isso.
-- **Escalabilidade:** Para muitos registros, o desempenho pode cair. Bancos como PostgreSQL ou MongoDB são recomendados para produção.
-
-
-
-### Estrutura dos Arquivos JSON (Exemplo)
-- `usuarios.json`:
+### Exemplos de Código por Camada
+- **Front-end (React):**
+  ```javascript
+  // Exemplo de requisição de login
+  axios.post('/users/login', { email, password })
+    .then(res => localStorage.setItem('token', res.data.access_token));
+  ```
+- **Back-end (FastAPI):**
+  ```python
+  @router.post('/users/login')
+  def login(user: UserLogin, db: DBManager = Depends(get_db)):
+      ... # validação e geração de JWT
+  ```
+- **Banco de Dados (JSON):**
   ```json
   [
-    {"id": 1, "nome": "João", "email": "joao@email.com", "senha": "$2b$12$..."
-  ]
-  ```
-- `produtos.json`:
-  ```json
-  [
-    {"id": 1, "nome": "Produto A", "preco": 100.0, "descricao": "..."
+    {"id": 1, "name": "João", "email": "joao@email.com", "senha": "$2b$12$..."}
   ]
   ```
 
+### Versionamento e Deploy Local
+- O projeto pode ser versionado com Git para controle de alterações.
+- Para rodar localmente, basta seguir as instruções de execução e garantir que as dependências estejam instaladas.
 
 
-### Referências e Créditos
-- Documentação oficial do [FastAPI](https://fastapi.tiangolo.com/)
-- Documentação do [React](https://react.dev/)
-- [Vite](https://vitejs.dev/)
+
+## Créditos e Referências
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [React](https://react.dev/)
 - [Passlib](https://passlib.readthedocs.io/en/stable/)
 - [Python-Jose](https://python-jose.readthedocs.io/en/latest/)
-- [Axios](https://axios-http.com/)
-- [TailwindCSS](https://tailwindcss.com/)
-- Documentação automática da API disponível em `/docs` (Swagger UI) ao rodar o back-end
+- [Vite](https://vitejs.dev/)
+- [Pydantic](https://docs.pydantic.dev/)
+
+
 
 
 
