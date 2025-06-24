@@ -1,7 +1,7 @@
 # Projeto 1.1 — Sistema de Reservas com POO
 
 ## Visão Geral
-Este projeto é um sistema completo de reservas de acomodações, desenvolvido para demonstrar domínio avançado de Programação Orientada a Objetos (POO) em Python, aliado a um front-end moderno em React. O armazenamento é feito em arquivos JSON, dispensando bancos relacionais, e toda a lógica de negócio é fortemente baseada em conceitos de POO, boas práticas de arquitetura e segurança.
+Este projeto é um sistema completo de reservas de acomodações, desenvolvido para demonstrar domínio  de Programação Orientada a Objetos (POO) em Python, aliado a um front-end moderno em React. O armazenamento é feito em arquivos JSON, dispensando bancos relacionais, e toda a lógica de negócio é fortemente baseada em conceitos de POO, boas práticas de arquitetura e segurança.
 
 ---
 
