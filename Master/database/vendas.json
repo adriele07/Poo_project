@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "place_id": 1,
+        "check_in": "2025-11-11",
+        "check_out": "2025-12-12",
+        "price": 450.0,
+        "guests": 1,
+        "titulo": "Apartamento Luxo Copacabana",
+        "endereco": "Rio de Janeiro, Copacabana",
+        "foto": "uploads/1-1-1.jpg"
+    },
+    {
+        "id": 2,
+        "user_id": 1,
+        "place_id": 12,
+        "check_in": "2025-11-14",
+        "check_out": "2025-11-15",
+        "price": 350.0,
+        "guests": 1,
+        "titulo": "Suíte em pousada boutique",
+        "endereco": "Paraty, Rio de Janeiro",
+        "foto": "uploads/1-12-1.jpg"
+    },
+    {
+        "id": 3,
+        "user_id": 1,
+        "place_id": 21,
+        "check_in": "2025-12-12",
+        "check_out": "2026-12-12",
+        "price": 0.0,
+        "guests": 1,
+        "titulo": "  m,mml",
+        "endereco": "cvfmvfkvfnv",
+        "foto": "uploads/1-21-2.png"
+    },
+    {
+        "id": 4,
+        "user_id": 2,
+        "place_id": 1,
+        "check_in": "2025-12-12",
+        "check_out": "2026-12-12",
+        "price": 450.0,
+        "guests": 3,
+        "titulo": "Apartamento Luxo Copacabana",
+        "endereco": "Rio de Janeiro, Copacabana",
+        "foto": "uploads/1-1-1.jpg"
+    }
+]
